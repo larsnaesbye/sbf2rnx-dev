@@ -1,0 +1,22 @@
+name: sbf2rnx-dev
+version: "0.0.1"
+author: Lars Næsbye Christensen <lars@naesbye.dk>
+args:
+  - filepath:
+      short: f
+      long: filepath
+      required: false
+      takes_value: true
+      help: Path to one .SBF file
+  - output:
+      short: o
+      long: output
+      required: false
+      takes_value: true
+      help: Output file name for RINEX file
+  - interval:
+      short: i
+      long: interval
+      required: false
+      takes_value: true
+      help: TBD

@@ -1,0 +1,12 @@
+[package]
+name = "sbf2rnx"
+version = "0.1.0"
+authors = ["Lars Næsbye Christensen<lars@naesbye.dk"]
+edition = "2018"
+target = ["src/main.rs"]
+
+[dependencies]
+rinex = "0.5.0"
+# clap = "3.2.15"
+clap = { version = "~2.34.0", features = ["yaml"] }
+thiserror = "1"
