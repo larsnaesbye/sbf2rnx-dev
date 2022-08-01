@@ -1,2 +1,2 @@
 #[derive(Clone, Debug)]
-struct SBF_Record {}
+struct SbfRecord {}
