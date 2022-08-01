@@ -8,15 +8,21 @@ args:
       required: false
       takes_value: true
       help: Path to one .SBF file
+  - interval:
+        short: i
+        long: interval
+        required: false
+        takes_value: true
+        help: TBD
   - output:
       short: o
       long: output
       required: false
       takes_value: true
       help: Output file name for RINEX file
-  - interval:
-      short: i
-      long: interval
+  - version:
+      short: v
+      long: version
       required: false
       takes_value: true
-      help: TBD
+      help: RINEX version of output file (default is 3.05)
