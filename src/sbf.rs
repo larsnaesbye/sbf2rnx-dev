@@ -2,7 +2,7 @@
 
 #[derive(Clone, Debug)]
 pub struct SbfBlockHeader {
-    sync: [char; 2], // always set to 0x24, 0x40 = "$@"
+    sync: [char; 2], // NOTE: always set to 0x24, 0x40 = "$@"
     crc: u16,
     id: u16,
     length: u16,
