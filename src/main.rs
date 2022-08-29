@@ -1,6 +1,6 @@
-//! This application converts Septentrio binary files
+//! This application converts Septentrio binary files (SBF)
 //! into receiver independent (RINEX) files.  
-
+//! Specification is found on page 244 on https://www.septentrio.com/system/files/support/asterx_sb_firmware_v4.8.4_reference_guide.pdf
 mod sbf;
 
 use clap::load_yaml;

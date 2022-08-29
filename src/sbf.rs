@@ -1,4 +1,4 @@
-//! The extracted information from an SBF file, arranged
+//! Record holding the extracted information from an SBF file, arranged
 
 #[derive(Clone, Debug)]
 pub struct SbfBlockHeader {
@@ -18,4 +18,25 @@ pub struct SbfBlockTimestamp {
 pub struct SbfBlock {
     header: SbfBlockHeader,
     timestamp: SbfBlockTimestamp,
+}
+
+// ====== SBF BLOCKS ======
+
+// --- Measurement Blocks ---
+enum MeasurementBlocks {
+    MeasEpoch = 4027,
+    MeasExtra = 4000,
+    Meas3Ranges = 4109,
+    Meas3CN0HiRes = 4110,
+    Meas3Doppler = 4111,
+    Meas3PP = 4112,
+    Meas3MP = 4113,
+    EndOfMeas = 5922
+}
+
+// --- Navigation Page Blocks
+enum NavigationPageBlocks {
+    GPSRawCA = 4017,
+    GPSRawL2C = 4018
+    // - here we fill out the rest from the PDF
 }
