@@ -5,7 +5,7 @@ args:
   - filepath:
       short: f
       long: filepath
-      required: false
+      required: true
       takes_value: true
       help: Path to one .SBF file
   - interval:
