@@ -5,6 +5,7 @@ mod sbf;
 
 use clap::load_yaml;
 use clap::App;
+use clap::AppSettings;
 use rinex::Rinex;
 use thiserror::Error;
 
@@ -16,7 +17,7 @@ pub enum Error {
 
 pub fn main() -> Result<(), Error> {
     let yaml = load_yaml!("arg.yaml");
-    let app = App::from_yaml(yaml); // TODO: replace deprecated YAML call with arg-builder
+    let app = App::from_yaml(yaml).setting(AppSettings::ArgRequiredElseHelp); // TODO: replace deprecated YAML call with arg-builder
     let matches = app.get_matches();
 
     let filepath: Option<Vec<&str>> = match matches.is_present("filepath") {
