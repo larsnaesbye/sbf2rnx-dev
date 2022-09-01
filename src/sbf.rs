@@ -22,159 +22,157 @@ pub struct SbfBlock {
 
 // ====== SBF BLOCK DATA ======
 
-enum SBFBlocks {
-    // --- Measurement Blocks ---
-    MeasEpoch = 4027,     // Measurement set of one epoch
-    MeasExtra = 4000,     // Additional info such as observable variance
-    Meas3Ranges = 4109,   // Code, phase and CN0 measurements
-    Meas3CN0HiRes = 4110, // Extension of Meas3Ranges containing fractional C/N0 values
-    Meas3Doppler = 4111,  // Extension of Meas3Ranges containing Doppler values
-    Meas3PP = 4112, // Extension of Meas3Ranges containing proprietary flags for data post-processing
-    Meas3MP = 4113, // Extension of Meas3Ranges containing multipath corrections applied by the receiver.
-    EndOfMeas = 5922, // Measurement epoch marker
+// --- Measurement Blocks ---
+const MEAS_EPOCH: i16 = 4027; // Measurement set of one epoch
+const MEAS_EXTRA: i16 = 4000; // Additional info such as observable variance
+const MEAS3RANGES: i16 = 4109; // Code, phase and CN0 measurements
+const MEAS3CN0HI_RES: i16 = 4110; // Extension of MEAS3RANGES containing fractional C/N0 values
+const MEAS3DOPPLER: i16 = 4111; // Extension of MEAS3RANGES containing Doppler values
+const MEAS3PP: i16 = 4112; // Extension of MEAS3RANGES containing proprietary flags for data post-processing
+const MEAS3MP: i16 = 4113; // Extension of MEAS3RANGES containing multipath corrections applied by the receiver.
+const END_OF_MEAS: i16 = 5922; // Measurement epoch marker
 
-    // --- Navigation Page Blocks
-    GPSRawCA = 4017,
-    GPSRawL2C = 4018,
-    GPSRawL5 = 4019,
-    GPSRawL1C = 4221,
-    GLORawCA = 4026,
-    GALRawFNAV = 4022,
-    GALRawINAV = 4023,
-    GALRawCNAV = 4024,
-    GEORawL1 = 4020,
-    GEORawL5 = 4021,
-    BDSRaw = 4047,
-    BDSRawB1C = 4218,
-    BDSRawB2a = 4219,
-    BDSRawB2b = 4242,
-    QZSRawL1CA = 4066,
-    QZSRawL2C = 4067,
-    QZSRawL5 = 4068,
-    QZSRawL6 = 4069,
-    QZSRawL1C = 4227,
-    QZSRawL1S = 4228,
-    NAVICRaw = 4093,
+// --- Navigation Page Blocks
+const GPSRAW_CA: i16 = 4017;
+const GPSRAW_L2C: i16 = 4018;
+const GPSRAW_L5: i16 = 4019;
+const GPSRAW_L1C: i16 = 4221;
+const GLORAW_CA: i16 = 4026;
+const GALRAW_FNAV: i16 = 4022;
+const GALRAW_INAV: i16 = 4023;
+const GALRAW_CNAV: i16 = 4024;
+const GEORAW_L1: i16 = 4020;
+const GEORAW_L5: i16 = 4021;
+const BDSRAW: i16 = 4047;
+const BDSRAW_B1C: i16 = 4218;
+const BDSRAW_B2A: i16 = 4219;
+const BDSRAW_B2B: i16 = 4242;
+const QZSRAW_L1CA: i16 = 4066;
+const QZSRAW_L2C: i16 = 4067;
+const QZSRAW_L5: i16 = 4068;
+const QZSRAW_L6: i16 = 4069;
+const QZSRAW_L1C: i16 = 4227;
+const QZSRAW_L1S: i16 = 4228;
+const NAVICRAW: i16 = 4093;
 
-    // GPS Decoded Message blocks
-    GPSNav = 5891,
-    GPSAlm = 5892,
-    GPSIon = 5893,
-    GPSUtc = 5894,
+// GPS Decoded Message blocks
+const GPSNAV: i16 = 5891;
+const GPSALM: i16 = 5892;
+const GPSION: i16 = 5893;
+const GPSUTC: i16 = 5894;
 
-    // GLONASS Decoded Message blocks
-    GLONav = 4004,
-    GLOAlm = 4005,
-    GLOTime = 4036,
+// GLONASS Decoded Message blocks
+const GLONAV: i16 = 4004;
+const GLOALM: i16 = 4005;
+const GLOTIME: i16 = 4036;
 
-    // Galileo Decoded Message blocks
-    GALNav = 4002,
-    GALAlm = 4003,
-    GALIon = 4030,
-    GALUtc = 4031,
-    GALGstGps = 4032,
-    GALSARRLM = 4034,
+// Galileo Decoded Message blocks
+const GALNAV: i16 = 4002;
+const GALALM: i16 = 4003;
+const GALION: i16 = 4030;
+const GALUTC: i16 = 4031;
+const GALGST_GPS: i16 = 4032;
+const GALSARRLM: i16 = 4034;
 
-    // BeiDou Decoded Message blocks
-    BDSNav = 4081,
-    BDSAlm = 4119,
-    BDSIon = 4120,
-    BDSUtc = 4121,
+// BeiDou Decoded Message blocks
+const BDSNAV: i16 = 4081;
+const BDSALM: i16 = 4119;
+const BDSION: i16 = 4120;
+const BDSUTC: i16 = 4121;
 
-    // QZSS Decoded Message blocks
-    QZSNav = 4095,
-    QZSAlm = 4116,
+// QZSS Decoded Message blocks
+const QZSNAV: i16 = 4095;
+const QZSALM: i16 = 4116;
 
-    // SBAS L1 Decoded Message blocks
-    GEOMT00 = 5925,
-    GEOPRNMask = 5926,
-    GEOFastCorr = 5927,
-    GEOIntegrity = 5928,
-    GEOFastCorrDegr = 5929,
-    GEONav = 5896,
-    GEODegrFactors = 5930,
-    GEONetworkTime = 5918,
-    GEOAlm = 5897,
-    GEOIGPMask = 5931,
-    GEOLongTermCorr = 5932,
-    GEOIonoDelay = 5933,
-    GEOServiceLevel = 5917,
-    GEOClockEphcovMatrix = 5934,
+// SBAS L1 Decoded Message blocks
+const GEOMT00: i16 = 5925;
+const GEOPRNMASK: i16 = 5926;
+const GEOFAST_CORR: i16 = 5927;
+const GEOINTEGRITY: i16 = 5928;
+const GEOFAST_CORR_DEGR: i16 = 5929;
+const GEONAV: i16 = 5896;
+const GEODEGR_FACTORS: i16 = 5930;
+const GEONETWORK_TIME: i16 = 5918;
+const GEOALM: i16 = 5897;
+const GEOIGPMASK: i16 = 5931;
+const GEOLONG_TERM_CORR: i16 = 5932;
+const GEOIONO_DELAY: i16 = 5933;
+const GEOSERVICE_LEVEL: i16 = 5917;
+const GEOCLOCK_EPHCOV_MATRIX: i16 = 5934;
 
-    // Position, Velocity and Time Blocks
-    PVICartesian = 4006,
-    PVIGeodetic = 4007,
-    PosCovCartesian = 5905,
-    PosCovGeodetic = 5906,
-    VelCovCartesian = 5907,
-    VelCovGeodetic = 5908,
-    DOP = 4001,
-    PosCart = 4044,
-    PosLocal = 4052,
-    PosProjected = 4094,
-    PVISatCartesian = 4008,
-    PVIResiduals = 4009,
-    RAIMStatistics = 4011,
-    GEOCorrections = 5935,
-    BaseVectorCart = 4043,
-    BaseVectorGeod = 4028,
-    FVISupport = 4076,
-    FVISupportA = 4079,
-    EndOfPVI = 5921,
+// Position, Velocity and Time Blocks
+const PVICARTESIAN: i16 = 4006;
+const PVIGEODETIC: i16 = 4007;
+const POS_COV_CARTESIAN: i16 = 5905;
+const POS_COV_GEODETIC: i16 = 5906;
+const VEL_COV_CARTESIAN: i16 = 5907;
+const VEL_COV_GEODETIC: i16 = 5908;
+const DOP: i16 = 4001;
+const POS_CART: i16 = 4044;
+const POS_LOCAL: i16 = 4052;
+const POS_PROJECTED: i16 = 4094;
+const PVISAT_CARTESIAN: i16 = 4008;
+const PVIRESIDUALS: i16 = 4009;
+const RAIMSTATISTICS: i16 = 4011;
+const GEOCORRECTIONS: i16 = 5935;
+const BASE_VECTOR_CART: i16 = 4043;
+const BASE_VECTOR_GEOD: i16 = 4028;
+const FVISUPPORT: i16 = 4076;
+const FVISUPPORT_A: i16 = 4079;
+const END_OF_PVI: i16 = 5921;
 
-    // Receiver Time Blocks
-    ReceiverTime = 5914,
-    xPPSOffset = 5911,
+// Receiver Time Blocks
+const RECEIVER_TIME: i16 = 5914;
+const X_PPSOFFSET: i16 = 5911;
 
-    // External Event Blocks
-    ExtEvent = 5924,
-    ExtEventPVICartesian = 4037,
-    ExtEventPVIGeodetic = 4038,
-    ExtEventBaseVectGeod = 4217,
+// External Event Blocks
+const EXT_EVENT: i16 = 5924;
+const EXT_EVENT_PVICARTESIAN: i16 = 4037;
+const EXT_EVENT_PVIGEODETIC: i16 = 4038;
+const EXT_EVENT_BASE_VECT_GEOD: i16 = 4217;
 
-    // Differential Correction Blocks
-    DiffCorrIn = 5919,
-    BaseStation = 5949,
-    RICMDatum = 4049,
+// Differential Correction Blocks
+const DIFF_CORR_IN: i16 = 5919;
+const BASE_STATION: i16 = 5949;
+const RICMDATUM: i16 = 4049;
 
-    // L-Band Demodulator Blocks
-    LBandTrackerStatus = 4201,
-    LBAS1DecoderStatus = 4202,
-    LBAS1Messages = 4203,
-    LBandBeams = 4204,
+// L-Band Demodulator Blocks
+const LBAND_TRACKER_STATUS: i16 = 4201;
+const LBAS1DECODER_STATUS: i16 = 4202;
+const LBAS1MESSAGES: i16 = 4203;
+const LBAND_BEAMS: i16 = 4204;
 
-    // Status Blocks
-    ChannelStatus = 4013,
-    ReceiverStatus = 4014,
-    SatVisibility = 4012,
-    InputLink = 4090,
-    OutputLink = 4091,
-    NTRIPClientStatus = 4053,
-    NTRIPServerStatus = 4122,
-    IPStatus = 4058,
-    WiFiAPStatus = 4054,
-    WiFiClientStatus = 4096,
-    DynDNSStatus = 4105,
-    PowerStatus = 4101,
-    QualityInd = 4082,
-    DiskStatus = 4059,
-    LogStatus = 4102,
-    RFStatus = 4092,
-    P2PPStatus = 4238,
-    CosmosStatus = 4243,
+// Status Blocks
+const CHANNEL_STATUS: i16 = 4013;
+const RECEIVER_STATUS: i16 = 4014;
+const SAT_VISIBILITY: i16 = 4012;
+const INPUT_LINK: i16 = 4090;
+const OUTPUT_LINK: i16 = 4091;
+const NTRIPCLIENT_STATUS: i16 = 4053;
+const NTRIPSERVER_STATUS: i16 = 4122;
+const IPSTATUS: i16 = 4058;
+const WI_FI_APSTATUS: i16 = 4054;
+const WI_FI_CLIENT_STATUS: i16 = 4096;
+const DYN_DNSSTATUS: i16 = 4105;
+const POWER_STATUS: i16 = 4101;
+const QUALITY_IND: i16 = 4082;
+const DISK_STATUS: i16 = 4059;
+const LOG_STATUS: i16 = 4102;
+const RFSTATUS: i16 = 4092;
+const P2PPSTATUS: i16 = 4238;
+const COSMOS_STATUS: i16 = 4243;
 
-    // Miscellaneous Blocks
-    ReceiverSetup = 5902,
-    RxComponents = 4084,
-    RxMessage = 4103,
-    Commands = 4015,
-    Comment = 5936,
-    BBSamples = 4040,
-    ASCIIIn = 4075,
+// Miscellaneous Blocks
+const RECEIVER_SETUP: i16 = 5902;
+const RX_COMPONENTS: i16 = 4084;
+const RX_MESSAGE: i16 = 4103;
+const COMMANDS: i16 = 4015;
+const COMMENT: i16 = 5936;
+const BBSAMPLES: i16 = 4040;
+const ASCIIIN: i16 = 4075;
 
-    // Advanced Blocks
-    SystemInfo = 6000,
-}
+// Advanced Blocks
+const SYSTEM_INFO: i16 = 6000;
 
 // --- Decoding functions ---
 
