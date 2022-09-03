@@ -3,9 +3,10 @@
 //! Specification is found on page 244 on https://www.septentrio.com/system/files/support/asterx_sb_firmware_v4.8.4_reference_guide.pdf
 mod sbf;
 
-use clap::load_yaml;
-use clap::App;
 use clap::AppSettings;
+use clap::Arg;
+use clap::Command;
+use clap::{arg, command};
 use rinex::Rinex;
 use thiserror::Error;
 
@@ -16,9 +17,15 @@ pub enum Error {
 }
 
 pub fn main() -> Result<(), Error> {
-    let yaml = load_yaml!("arg.yaml");
-    let app = App::from_yaml(yaml).setting(AppSettings::ArgRequiredElseHelp); // TODO: replace deprecated YAML call with arg-builder
-    let matches = app.get_matches();
+    let matches = Command::new("sbf2rnx-dev")
+        .version("0.0.1")
+        .author("Lars Næsbye Christensen <lars@naesbye.dk>")
+        .about("Preliminary work for a Septentrio to RINEX converter")
+        .arg(Arg::new("filepath").short('f').long("filepath"))
+        .arg(Arg::new("interval").short('i').long("interval"))
+        .arg(Arg::new("output").short('o').long("output"))
+        .setting(AppSettings::ArgRequiredElseHelp)
+        .get_matches();
 
     let filepath: Option<Vec<&str>> = match matches.is_present("filepath") {
         true => Some(matches.value_of("filepath").unwrap().split(",").collect()),
