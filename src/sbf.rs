@@ -36,23 +36,23 @@ const END_OF_MEAS: i16 = 5922; // Measurement epoch marker
 const GPSRAW_CA: i16 = 4017; // GPS CA navigation subframe
 const GPSRAW_L2C: i16 = 4018; // GPS L2C navigation frame
 const GPSRAW_L5: i16 = 4019; // GPS L5 navigation frame
-const GPSRAW_L1C: i16 = 4221;
+const GPSRAW_L1C: i16 = 4221; // GPS L1C navigation frame
 const GLORAW_CA: i16 = 4026; // GLONASS CA navigation string
 const GALRAW_FNAV: i16 = 4022; // Galileo F/NAV navigation page
 const GALRAW_INAV: i16 = 4023; // Galileo I/NAV navigation page
-const GALRAW_CNAV: i16 = 4024;
+const GALRAW_CNAV: i16 = 4024; // Galileo C/NAV navigation page
 const GEORAW_L1: i16 = 4020; // SBAS L1 navigation message
 const GEORAW_L5: i16 = 4021; // SBAS L5 navigation message
 const BDSRAW: i16 = 4047; // BeiDou navigation page
 const BDSRAW_B1C: i16 = 4218; // BeiDou B1C navigation frame
 const BDSRAW_B2A: i16 = 4219; // BeiDou B2a navigation frame
-const BDSRAW_B2B: i16 = 4242;
+const BDSRAW_B2B: i16 = 4242; // BeiDou B2b navigation frame
 const QZSRAW_L1CA: i16 = 4066; // QZSS L1 CA navigation frame
 const QZSRAW_L2C: i16 = 4067; // QZSS L2C navigation frame
 const QZSRAW_L5: i16 = 4068; // QZSS L5 navigation frame
-const QZSRAW_L6: i16 = 4069;
-const QZSRAW_L1C: i16 = 4227;
-const QZSRAW_L1S: i16 = 4228;
+const QZSRAW_L6: i16 = 4069; // QZSS L6 navigation message
+const QZSRAW_L1C: i16 = 4227; // QZSS L1C navigation frame
+const QZSRAW_L1S: i16 = 4228; // QZSS L1S navigation message
 const NAVICRAW: i16 = 4093; // NavIC/IRNSS subframe
 
 // GPS Decoded Message blocks
@@ -111,10 +111,10 @@ const DOP: i16 = 4001; // Dilution of precision
 const POS_CART: i16 = 4044; // Position, variance and baseline in Cartesian coordinates
 const POS_LOCAL: i16 = 4052; // Position in a local datum
 const POS_PROJECTED: i16 = 4094; // Plane grid coordinates
-const PVTSAT_CARTESIAN: i16 = 4008; //
-const PVTRESIDUALS: i16 = 4009; //
-const RAIMSTATISTICS: i16 = 4011; //
-const GEOCORRECTIONS: i16 = 5935; //
+const PVTSAT_CARTESIAN: i16 = 4008; // Satellite positions
+const PVTRESIDUALS: i16 = 4009; // Measurement residuals
+const RAIMSTATISTICS: i16 = 4011; // Integrity statistics
+const GEOCORRECTIONS: i16 = 5935; // Orbit, Clock and pseudoranges SBAS corrections
 const BASE_VECTOR_CART: i16 = 4043; // XYZ relative position and velocity with respect to base(s)
 const BASE_VECTOR_GEOD: i16 = 4028; // ENU relative position and velocity with respect to base(s)
 const FVISUPPORT: i16 = 4076; // Internal parameters for maintenance and support
@@ -138,8 +138,8 @@ const RICMDATUM: i16 = 4049; // Datum information from the RTK service provider
 
 // L-Band Demodulator Blocks
 const LBAND_TRACKER_STATUS: i16 = 4201; // Status of the L-band signal tracking
-const LBAS1DECODER_STATUS: i16 = 4202; //
-const LBAS1MESSAGES: i16 = 4203; //
+const LBAS1DECODER_STATUS: i16 = 4202; // Status of the LBAS1 L-band service
+const LBAS1MESSAGES: i16 = 4203; // LBAS1over-the-air message
 const LBAND_BEAMS: i16 = 4204; // L-band satellite/beam information
 
 // Status Blocks
@@ -159,7 +159,7 @@ const QUALITY_IND: i16 = 4082; // Quality indicators
 const DISK_STATUS: i16 = 4059; // Internal logging status
 const LOG_STATUS: i16 = 4102; // Log sessions status
 const RFSTATUS: i16 = 4092; // Radio-frequency interference mitigation status
-const P2PPSTATUS: i16 = 4238; //
+const P2PPSTATUS: i16 = 4238; // P2PP client/server status
 const COSMOS_STATUS: i16 = 4243; // Cosmos receiver service status
 
 // Miscellaneous Blocks
