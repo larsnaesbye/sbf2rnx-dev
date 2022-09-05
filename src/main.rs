@@ -20,11 +20,11 @@ pub fn main() -> Result<(), Error> {
     let matches = Command::new("sbf2rnx-dev")
         .version("0.0.1")
         .author("Lars Næsbye Christensen <lars@naesbye.dk>")
-        .about("Preliminary work for a Septentrio to RINEX converter")
+        .about("Preliminary work for a Septentrio SBF to RINEX converter")
         .arg(Arg::new("filepath").short('f').long("filepath"))
         .arg(Arg::new("interval").short('i').long("interval"))
         .arg(Arg::new("output").short('o').long("output"))
-        .setting(AppSettings::ArgRequiredElseHelp)
+        .arg_required_else_help(true)
         .get_matches();
 
     let filepath: Option<Vec<&str>> = match matches.is_present("filepath") {
