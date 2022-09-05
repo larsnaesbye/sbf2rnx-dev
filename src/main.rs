@@ -6,7 +6,6 @@ mod sbf;
 use clap::AppSettings;
 use clap::Arg;
 use clap::Command;
-use clap::{arg, command};
 use rinex::Rinex;
 use thiserror::Error;
 
