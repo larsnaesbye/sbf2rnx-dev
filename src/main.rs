@@ -25,10 +25,10 @@ pub fn main() -> Result<(), Error> {
     write_rnx_file(rinexrec);
     return Ok(());
 }
-
+//! Handle all command line parameters
 fn matches() -> ArgMatches {
     let matches = Command::new("sbf2rnx-dev")
-        .version("0.0.1")
+        .version("0.1.0")
         .author("Lars Næsbye Christensen <lars@naesbye.dk>")
         .about("Preliminary work for a Septentrio SBF to RINEX converter")
         .arg(
