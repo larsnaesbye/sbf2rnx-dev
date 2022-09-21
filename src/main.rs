@@ -6,6 +6,7 @@ mod sbf;
 use clap::Command;
 use clap::{Arg, ArgMatches};
 use rinex::Rinex;
+use std::path::Path;
 use thiserror::Error;
 
 #[derive(Debug, Error)]
@@ -20,13 +21,15 @@ pub fn main() -> Result<(), Error> {
         true => Some(matches.value_of("filepath").unwrap().split(",").collect()),
         false => None,
     };
-
-    let rinexrec = sbf2rnxrec(filepath);
+    // get the file data
+    let rinexrec = sbf2rnxrec(filepath.unwrap());
     write_rnx_file(rinexrec);
     return Ok(());
 }
-//! Handle all command line parameters
+
 fn matches() -> ArgMatches {
+    //! Handle all command line parameters
+
     let matches = Command::new("sbf2rnx-dev")
         .version("0.1.0")
         .author("Lars Næsbye Christensen <lars@naesbye.dk>")
@@ -44,8 +47,22 @@ fn matches() -> ArgMatches {
     return matches;
 }
 
-fn sbf2rnxrec(_filepath: Option<Vec<&str>>) -> Rinex {
-    // TODO: build RINEX records and output them as files
+fn sbf2rnxrec(filepath: Vec<&str>) -> Rinex {
+    //! Build RINEX records and output them as files
+    // For now we read the entire file as bytes before conversion - this uses more memory!
+    match std::fs::read(Path::new(&filepath.as_ptr())) {
+        Ok(bytes) => {
+            eprintln!("{}", bytes.len().to_string()) // For testing, just print the length of the file
+        }
+        Err(e) => {
+            if e.kind() == std::io::ErrorKind::PermissionDenied {
+                eprintln!("Please run again with appropriate permissions.");
+                panic!("{}", e)
+            }
+            panic!("{}", e);
+        }
+    }
+
     return Rinex::default();
 }
 
