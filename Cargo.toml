@@ -6,5 +6,5 @@ edition = "2021"
 
 [dependencies]
 clap = "4"
-rinex = "0.6"
+rinex = "0"
 thiserror = "1"
