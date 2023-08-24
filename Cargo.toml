@@ -5,6 +5,5 @@ authors = ["Lars Næsbye Christensen <lars@naesbye.dk"]
 edition = "2021"
 
 [dependencies]
-clap = "4"
-rinex = "0"
-thiserror = "1"
+rinex = "0.11.0"
+thiserror = "1.0"
