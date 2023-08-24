@@ -24,26 +24,29 @@ fn sbf2rnxrec(filepath: &str) -> Rinex {
     //! Build RINEX records and output them as files
     // For now we read the entire file as bytes before conversion - this uses more memory!
 
+    let rrecord: Rinex = Rinex::default();
     match std::fs::read(Path::new(&filepath).as_os_str()) {
-       Ok(bytes) => {
-           eprintln!("Length {}", bytes.len().to_string()) // For testing, just print the length of the file
-       }
-       Err(e) => {
-           if e.kind() == std::io::ErrorKind::NotFound {
-               eprintln!("Please check path {}", &filepath);
-               panic!("{}", e)
-           }
-           if e.kind() == std::io::ErrorKind::PermissionDenied {
-               eprintln!("Please run again with appropriate permissions.");
-               panic!("{}", e)
-           }
-           panic!("{}", e);
-       }
+        Ok(bytes) => {
+            // for byte in bytes {
+            //     eprintln!("Read byte {}", byte);
+            // }
+        }
+        Err(e) => {
+            if e.kind() == std::io::ErrorKind::NotFound {
+                eprintln!("Please check path {}", &filepath);
+                panic!("{}", e)
+            }
+            if e.kind() == std::io::ErrorKind::PermissionDenied {
+                eprintln!("Please run again with appropriate permissions.");
+                panic!("{}", e)
+            }
+            panic!("{}", e);
+        }
     }
 
-    return Rinex::default();
+    return rrecord;
 }
 
 fn write_rnx_file(rinexrec: Rinex) {
-    //rinexrec.to_file("").expect("TODO: panic message");
+    rinexrec.to_file("test.rnx").expect("Error: RINEX writeout failed.");
 }
