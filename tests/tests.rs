@@ -2,7 +2,7 @@
 #[cfg(test)]
 mod tests {
     #[test]
-    fn it_works() { // TODO: replace with real tests
+    fn it_works() {
         let result = 2 + 2;
         assert_eq!(result, 4);
     }

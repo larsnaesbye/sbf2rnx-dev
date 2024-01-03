@@ -1,9 +1,10 @@
 [package]
 name = "sbf2rnx"
 version = "0.1.0"
-authors = ["Lars Næsbye Christensen <lars@naesbye.dk"]
+authors = ["Lars Næsbye Christensen <lars@naesbye.dk>"]
 edition = "2021"
 
 [dependencies]
 rinex = "0.15"
 thiserror = "1.0"
+clap = { version = "4.4.12", features = [] }

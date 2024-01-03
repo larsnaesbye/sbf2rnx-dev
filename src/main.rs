@@ -6,6 +6,7 @@ mod sbf;
 use rinex::Rinex;
 use std::path::Path;
 use thiserror::Error;
+use clap::{arg, Command};
 
 #[derive(Debug, Error)]
 pub enum Error {
@@ -14,22 +15,28 @@ pub enum Error {
 }
 
 pub fn main() -> Result<(), Error> {
-    let filepath: &str = "../../tests/testdata/KMS3240s.22_";
+    let matches = Command::new("sbf2rnx")
+        .version("0.1")
+        .author("Lars Næsbye Christensen <lars@naesbye.dk>")
+        .about("Does awesome things")
+        .arg(arg!(--i <VALUE>).required(true))
+        .get_matches();
+    let filepath: String = matches.get_one::<String>("i").unwrap().to_string();
     let rinexrec = sbf2rnxrec(filepath);
-    write_rnx_file(rinexrec);
+    // write_rnx_file(rinexrec);
     return Ok(());
 }
 
-fn sbf2rnxrec(filepath: &str) -> Rinex {
+fn sbf2rnxrec(filepath: String) -> Rinex {
     //! Build RINEX records and output them as files
     // For now we read the entire file as bytes before conversion - this uses more memory!
 
     let rrecord: Rinex = Rinex::default();
     match std::fs::read(Path::new(&filepath).as_os_str()) {
         Ok(bytes) => {
-            // for byte in bytes {
-            //     eprintln!("Read byte {}", byte);
-            // }
+            for byte in bytes {
+                eprintln!("Read byte {}", byte);
+            }
         }
         Err(e) => {
             if e.kind() == std::io::ErrorKind::NotFound {
