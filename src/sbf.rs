@@ -281,61 +281,61 @@ const SYSTEM_INFO: i16 = 6000;
 // --- Decoding functions ---
 
 fn decode_measepoch(measepochdata: u8) -> u8 {
-    return measepochdata; // Placeholder
+    measepochdata // Placeholder
 }
 
 fn decode_gpsnav(gpsnavdata: u8) -> u8 {
-    return gpsnavdata; // Placeholder
+    gpsnavdata // Placeholder
 }
 
 fn decode_galnav(galnavdata: u8) -> u8 {
-    return galnavdata; // Placeholder
+    galnavdata // Placeholder
 }
 
 fn decode_glonav(glonavdata: u8) -> u8 {
-    return glonavdata; // Placeholder
+    glonavdata // Placeholder
 }
 
 fn decode_sbasnav(sbasnavdata: u8) -> u8 {
-    return sbasnavdata; // Placeholder
+    sbasnavdata // Placeholder
 }
 
 fn decode_gpsrawcanav(gpsrawcanavdata: u8) -> u8 {
-    return gpsrawcanavdata; // Placeholder
+    gpsrawcanavdata // Placeholder
 }
 
 fn decode_georaw(georawdata: u8) -> u8 {
-    return georawdata; // Placeholder
+    georawdata // Placeholder
 }
 
 fn decode_glorawcanav(glorawcanavdata: u8) -> u8 {
-    return glorawcanavdata; // Placeholder
+    glorawcanavdata // Placeholder
 }
 
 fn decode_gpsion(gpsiondata: u8) -> u8 {
-    return gpsiondata; // Placeholder
+    gpsiondata // Placeholder
 }
 
 fn decode_galion(galiondata: u8) -> u8 {
-    return galiondata; // Placeholder
+    galiondata // Placeholder
 }
 
 fn decode_gpsutc(gpsutcdata: u8) -> u8 {
-    return gpsutcdata; // Placeholder
+    gpsutcdata // Placeholder
 }
 
 fn decode_gpsalm(gpsalmdata: u8) -> u8 {
-    return gpsalmdata; // Placeholder
+    gpsalmdata // Placeholder
 }
 
 fn decode_galutc(galutcdata: u8) -> u8 {
-    return galutcdata; // Placeholder
+    galutcdata // Placeholder
 }
 
 fn decode_galalm(galalmdata: u8) -> u8 {
-    return galalmdata; // Placeholder
+    galalmdata // Placeholder
 }
 
 fn decode_sbf(sbfdata: u8) -> u8 {
-    return sbfdata; // Placeholder
+    sbfdata // Placeholder
 }

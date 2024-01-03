@@ -24,7 +24,7 @@ pub fn main() -> Result<(), Error> {
     let filepath: String = matches.get_one::<String>("i").unwrap().to_string();
     let rinexrec = sbf2rnxrec(filepath);
     // write_rnx_file(rinexrec);
-    return Ok(());
+    Ok(())
 }
 
 fn sbf2rnxrec(filepath: String) -> Rinex {
@@ -51,7 +51,7 @@ fn sbf2rnxrec(filepath: String) -> Rinex {
         }
     }
 
-    return rrecord;
+    rrecord
 }
 
 fn write_rnx_file(rinexrec: Rinex) {
