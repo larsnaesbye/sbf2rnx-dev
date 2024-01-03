@@ -15,10 +15,10 @@ pub enum Error {
 }
 
 pub fn main() -> Result<(), Error> {
-    let matches = Command::new("sbf2rnx")
-        .version("0.1")
-        .author("Lars Næsbye Christensen <lars@naesbye.dk>")
-        .about("Does awesome things")
+    let matches = Command::new(env!("CARGO_PKG_NAME"))
+        .version(env!("CARGO_PKG_VERSION"))
+        .author(env!("CARGO_PKG_AUTHORS"))
+        .about(env!("CARGO_PKG_DESCRIPTION"))
         .arg(arg!(--i <VALUE>).required(true))
         .get_matches();
     let filepath: String = matches.get_one::<String>("i").unwrap().to_string();
