@@ -6,6 +6,8 @@ edition = "2021"
 description = "Converts SBF to RINEX"
 
 [dependencies]
+binread = "2.2.0"
+bstr = "1.9"
+clap = { version = "4.4", features = [] }
 rinex = "0.15"
 thiserror = "1.0"
-clap = { version = "4.4.12", features = [] }

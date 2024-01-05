@@ -1,4 +1,6 @@
 //! Record holding the extracted information from an SBF file, arranged
+use bstr::ByteSlice;
+use rinex::Rinex;
 
 #[derive(Clone, Debug)]
 pub struct SbfBlockHeader {
@@ -20,6 +22,9 @@ pub struct SbfBlock {
     header: SbfBlockHeader,
     timestamp: SbfBlockTimestamp,
 }
+
+pub(crate) const SBF_SYNC1: u8 = 0x24;        /* SBF message header sync field 1 (correspond to $) */
+pub(crate) const SBF_SYNC2: u8 = 0x40;        /* SBF message header sync field 2 (correspond to @)*/
 
 // ====== SBF BLOCK DATA ======
 
@@ -336,6 +341,17 @@ fn decode_galalm(galalmdata: u8) -> u8 {
     galalmdata // Placeholder
 }
 
-fn decode_sbf(sbfdata: u8) -> u8 {
-    sbfdata // Placeholder
+pub(crate) fn process_sbfdata(bytes: Vec<u8>) -> Rinex {
+    // let's find SBF blocks by using their sync bytes
+
+    let pattern: [u8; 2] = [SBF_SYNC1, SBF_SYNC2];
+    let result: Vec<Vec<u8>> = bytes.split_str(&pattern).map(|x| x.to_vec()).collect();
+    // now we have a collection of SBF blocks
+    for block in result {
+        eprintln!("Read block {:?}", block);
+        // let crc = ((block[1] as u16) << 8) | block[2] as u16;
+        // eprintln!("CRC: {}", crc);
+    }
+
+    Rinex::default() // Placeholder to output right type for now
 }
