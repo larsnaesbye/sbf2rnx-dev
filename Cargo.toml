@@ -4,10 +4,13 @@ version = "0.1.0"
 authors = ["Lars Næsbye Christensen <lars@naesbye.dk>"]
 edition = "2021"
 description = "Converts SBF to RINEX"
+rust-version = "1.71.0"
+categories = ["science::geo", "parsing"]
 
 [dependencies]
-binread = "2.2.0"
+
 bstr = "1.9"
 clap = { version = "4.4", features = [] }
+nom = "7.1"
 rinex = "0.15"
 thiserror = "1.0"

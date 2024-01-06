@@ -23,7 +23,7 @@ pub fn main() -> Result<(), Error> {
         .get_matches();
     let filepath: String = matches.get_one::<String>("i").unwrap().to_string();
     let rinexrec = sbf2rnxrec(filepath);
-    //write_rnx_file(rinexrec);
+    write_rnx_file(rinexrec);
     Ok(())
 }
 

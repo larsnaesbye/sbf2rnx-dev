@@ -1,4 +1,4 @@
-# sbf2rnx-dev
+# sbf2rnx
 
 A fun little project to see if I can convert SBF (Septentrio) binary files to RINEX using Rust.
 

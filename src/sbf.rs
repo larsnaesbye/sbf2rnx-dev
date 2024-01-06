@@ -342,16 +342,18 @@ fn decode_galalm(galalmdata: u8) -> u8 {
 }
 
 pub(crate) fn process_sbfdata(bytes: Vec<u8>) -> Rinex {
+    let mut rinexstruct = Rinex::default();
+    rinexstruct.header.program = env!("CARGO_PKG_NAME").parse().unwrap();
     // let's find SBF blocks by using their sync bytes
-
     let pattern: [u8; 2] = [SBF_SYNC1, SBF_SYNC2];
     let result: Vec<Vec<u8>> = bytes.split_str(&pattern).map(|x| x.to_vec()).collect();
-    // now we have a collection of SBF blocks
+
+    // now we have a collection of SBF blocks to iterate through
     for block in result {
         eprintln!("Read block {:?}", block);
         // let crc = ((block[1] as u16) << 8) | block[2] as u16;
         // eprintln!("CRC: {}", crc);
     }
 
-    Rinex::default() // Placeholder to output right type for now
+    rinexstruct // Placeholder to output right type for now
 }
